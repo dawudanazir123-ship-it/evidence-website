@@ -58,6 +58,78 @@ const products = [
         category: "home",
         image: "https://via.placeholder.com/200x200?text=Knife+Set"
     },
+     {
+        id: 1,
+        name: "Wireless Bluetooth Headphones",
+        price: 49.99,
+        description: "Premium noise-cancelling wireless headphones with 30-hour battery life",
+        category: "electronics",
+        image: "https://via.placeholder.com/200x200?text=Headphones"
+    },
+    {
+        id: 2,
+        name: "Smartphone Power Bank 10000mAh",
+        price: 29.99,
+        description: "Fast-charging portable power bank with dual USB ports",
+        category: "electronics",
+        image: "https://via.placeholder.com/200x200?text=Power+Bank"
+    },
+    {
+        id: 3,
+        name: "Men's Casual T-Shirt",
+        price: 19.99,
+        description: "Comfortable cotton t-shirt, available in multiple colors",
+        category: "clothing",
+        image: "https://via.placeholder.com/200x200?text=T-Shirt"
+    },
+    {
+        id: 4,
+        name: "Women's Stylish Handbag",
+        price: 39.99,
+        description: "Elegant leather handbag with multiple compartments",
+        category: "clothing",
+        image: "https://via.placeholder.com/200x200?text=Handbag"
+    },
+    {
+        id: 5,
+        name: "Stainless Steel Water Bottle",
+        price: 15.99,
+        description: "Insulated water bottle, keeps drinks cold for 24 hours",
+        category: "home",
+        image: "https://via.placeholder.com/200x200?text=Water+Bottle"
+    },
+    {
+        id: 6,
+        name: "Kitchen Knife Set",
+        price: 59.99,
+        description: "Professional 5-piece stainless steel knife set",
+        category: "home",
+        image: "https://via.placeholder.com/200x200?text=Knife+Set"
+    },
+    {
+        id: 7,
+        name: "Face Moisturizer Cream",
+        price: 24.99,
+        description: "Hydrating face cream for all skin types",
+        category: "beauty",
+        image: "https://via.placeholder.com/200x200?text=Moisturizer"
+    },
+    {
+        id: 8,
+        name: "Organic Honey 500g",
+        price: 12.99,
+        description: "Pure organic honey, sourced from local beekeepers",
+        category: "food",
+        image: "https://via.placeholder.com/200x200?text=Honey"
+    },
+    {
+        id: 9,
+        name: "Yoga Mat",
+        price: 22.99,
+        description: "Non-slip exercise yoga mat with carrying strap",
+        category: "sports",
+        image: "https://via.placeholder.com/200x200?text=Yoga+Mat"
+    },
     {
         id: 7,
         name: "Face Moisturizer Cream",
@@ -672,4 +744,5 @@ style.textContent = `
 `;
 
 document.head.appendChild(style);
+
 
