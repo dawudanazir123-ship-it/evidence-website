@@ -3,7 +3,7 @@
 // Sample Products Data
 const products = [
     {
-        id: 1,
+      id: 1,
         name: "Wireless Bluetooth Headphones",
         price: 49.99,
         description: "Premium noise-cancelling wireless headphones with 30-hour battery life",
@@ -11,6 +11,14 @@ const products = [
         image: "https://via.placeholder.com/200x200?text=Headphones"
      },
      {
+      id: 1,
+        name: "Wireless Bluetooth Headphones",
+        price: 49.99,
+        description: "Premium noise-cancelling wireless headphones with 30-hour battery life",
+        category: "electronics",
+        image: "https://via.placeholder.com/200x200?text=Headphones"
+    },
+    {
         id: 1,
         name: "Wireless Bluetooth Headphones",
         price: 49.99,
@@ -744,5 +752,6 @@ style.textContent = `
 `;
 
 document.head.appendChild(style);
+
 
 
