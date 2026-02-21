@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL~RHAMA - Fast Delivery Products</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>AL~RHAMA</h1>
+                <p>Fast Delivery to Your Doorstep</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li id="auth-buttons">
+                        <button class="btn login-btn" onclick="openLoginModal()">Login</button>
+                        <button class="btn register-btn" onclick="openRegisterModal()">Register</button>
+                    </li>
+                    <li id="user-menu" style="display: none;">
+                        <div class="dropdown">
+                            <button class="btn user-btn" onclick="toggleDropdown()">
+                                <i class="fas fa-user"></i> <span id="user-name">User</span> <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content" id="user-dropdown">
+                                <a href="orders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                                <a href="profile.html"><i class="fas fa-user-edit"></i> My Profile</a>
+                                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="cart-icon" onclick="openCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to AL~RHAMA</h1>
+                <p>Your trusted partner for fast and reliable product delivery</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="scrollToProducts()">Shop Now</button>
+                    <button class="btn btn-secondary" onclick="openLoginModal()">Login to Order</button>
+                </div>
+                <div class="delivery-promise">
+                    <i class="fas fa-truck"></i>
+                    <span>Order by 2 PM → Delivered Tomorrow!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>Next-day delivery guaranteed for orders placed before 2 PM</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Payment</h3>
+                    <p>100% secure payment gateway with multiple options</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Customer support available round the clock</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-undo"></i>
+                    <h3>Easy Returns</h3>
+                    <p>Hassle-free return policy within 7 days</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterProducts('electronics')">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Electronics</h3>
+                    <p>Latest gadgets & devices</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('clothing')">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Clothing</h3>
+                    <p>Fashion & apparel</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('home')">
+                    <i class="fas fa-home"></i>
+                    <h3>Home & Kitchen</h3>
+                    <p>Essentials for your home</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('beauty')">
+                    <i class="fas fa-spa"></i>
+                    <h3>Beauty & Personal Care</h3>
+                    <p>Skincare & cosmetics</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('food')">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Groceries</h3>
+                    <p>Fresh & packaged foods</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('sports')">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Sports & Fitness</h3>
+                    <p>Equipment & accessories</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="product-filters">
+                <button class="filter-btn active" onclick="showAllProducts()">All Products</button>
+                <button class="filter-btn" onclick="filterProducts('electronics')">Electronics</button>
+                <button class="filter-btn" onclick="filterProducts('clothing')">Clothing</button>
+                <button class="filter-btn" onclick="filterProducts('home')">Home & Kitchen</button>
+                <button class="filter-btn" onclick="filterProducts('beauty')">Beauty</button>
+            </div>
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About AL~RHAMA</h2>
+                    <p>At AL~RHAMA, we are committed to providing you with the best products and fastest delivery service. Our mission is to make your shopping experience seamless, convenient, and enjoyable.</p>
+                    <p>Founded with a vision to serve our community with quality products and exceptional customer service, we have grown to become a trusted name in e-commerce.</p>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check"></i> Quality Products</li>
+                        <li><i class="fas fa-check"></i> Fast Delivery</li>
+                        <li><i class="fas fa-check"></i> Customer Satisfaction</li>
+                        <li><i class="fas fa-check"></i> Competitive Prices</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x400?text=AL-RHAMA+Team" alt="AL~RHAMA Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Amazing service! Ordered at 1 PM and received my package the next morning. Will definitely order again!"</p>
+                    <h4>- Ahmed Hassan</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Great products and excellent customer support. The delivery was super fast and the packaging was perfect."</p>
+                    <h4>- Fatima Ali</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"I love shopping at AL~RHAMA. The website is easy to use and the delivery is always on time. Highly recommended!"</p>
+                    <h4>- Mohammed Saleh</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Business Street, City, Country</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+123 456 7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@al-rhama.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Mon-Fri: 9 AM - 8 PM<br>Sat: 10 AM - 6 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>AL~RHAMA</h3>
+                    <p>Your trusted partner for fast and reliable product delivery. Quality products, fast service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates and special offers</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AL~RHAMA. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <p class="divider">or</p>
+                <button type="button" class="btn btn-google" onclick="googleLogin()">
+                    <i class="fab fa-google"></i> Login with Google
+                </button>
+                <p class="register-link">Don't have an account? <a href="#" onclick="openRegisterModal()">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Create New Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Phone Number</label>
+                    <input type="tel" id="registerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                <div class="form-checkbox">
+                    <label>
+                        <input type="checkbox" required>
+                        I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <p class="divider">or</p>
+                <button type="button" class="btn btn-google" onclick="googleLogin()">
+                    <i class="fab fa-google"></i> Register with Google
+                </button>
+                <p class="login-link">Already have an account? <a href="#" onclick="openLoginModal()">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be loaded here -->
+                <p id="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <div class="cart-total-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="cart-total-row">
+                    <span>Shipping:</span>
+                    <span id="cart-shipping">$5.00</span>
+                </div>
+                <div class="cart-total-row total">
+                    <span>Total:</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
