@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AL~RHAMA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .checkout-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .checkout-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .checkout-steps::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+        
+        .step {
+            width: 33%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .step.active .step-number {
+            background: #2196F3;
+        }
+        
+        .step-text {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .step.active .step-text {
+            color: #2196F3;
+        }
+        
+        .cart-summary {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item-checkout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .cart-item-details-checkout {
+            flex: 1;
+        }
+        
+        .cart-item-name-checkout {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        
+        .cart-item-price-checkout {
+            color: #4CAF50;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .cart-item-quantity-checkout {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .order-total {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .total-row.total {
+            font-weight: 700;
+            font-size: 24px;
+            color: #4CAF50;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .delivery-options {
+            margin-bottom: 30px;
+        }
+        
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .delivery-option:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+        
+        .delivery-option input[type="radio"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .delivery-info {
+            flex: 1;
+        }
+        
+        .delivery-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .delivery-time {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .delivery-price {
+            font-weight: 700;
+            color: #4CAF50;
+            font-size: 18px;
+        }
+        
+        .order-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .order-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .order-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .order-btn.cart-btn {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .order-btn.cart-btn:hover {
+            background: #d0d0d0;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+        
+        .empty-cart i {
+            font-size: 60px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-container {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .step {
+                width: auto;
+            }
+            
+            .step-text {
+                display: none;
+            }
+            
+            .order-btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>AL~RHAMA</h1>
+                <p>Fast Delivery to Your Doorstep</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li>
+                        <button class="cart-icon" onclick="window.location.href='index.html#products'">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="checkout-container">
+            <div class="checkout-title">
+                <h1><i class="fas fa-shopping-cart"></i> Checkout</h1>
+                <p>Review your order and complete your purchase</p>
+            </div>
+
+            <div class="checkout-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Cart</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Delivery</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Confirm</div>
+                </div>
+            </div>
+
+            <div id="checkout-content">
+                <!-- Cart summary will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>AL~RHAMA</h3>
+                    <p>Your trusted partner for fast and reliable product delivery.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +233 203749874</li>
+                        <li><i class="fas fa-clock"></i> 9 AM - 8 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AL~RHAMA. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load cart items on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCheckout();
+        });
+
+        function loadCheckout() {
+            const cart = JSON.parse(localStorage.getItem('alrhama_cart')) || [];
+            const checkoutContent = document.getElementById('checkout-content');
+
+            if (cart.length === 0) {
+                checkoutContent.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                        <button class="order-btn cart-btn" onclick="window.location.href='index.html'">
+                            <i class="fas fa-shopping-bag"></i> Continue Shopping
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate totals
+            let subtotal = 0;
+            let shipping = 5.00; // Fixed shipping fee
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+            
+            const total = subtotal + shipping;
+
+            // Build cart summary
+            let cartHTML = `
+                <div class="cart-summary">
+                    <h2 style="margin-bottom: 20px; color: #333;">Order Summary</h2>
+            `;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                cartHTML += `
+                    <div class="cart-item-checkout">
+                        <div class="cart-item-details-checkout">
+                            <div class="cart-item-name-checkout">${item.name}</div>
+                            <div class="cart-item-quantity-checkout">Quantity: ${item.quantity}</div>
+                            <div class="cart-item-price-checkout">$${item.price.toFixed(2)} each</div>
+                        </div>
+                        <div style="font-weight: 700; color: #4CAF50; font-size: 20px;">
+                            $${itemTotal.toFixed(2)}
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartHTML += `
+                </div>
+                
+                <div class="order-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span>$${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Shipping:</span>
+                        <span>$${shipping.toFixed(2)}</span>
+                    </div>
+                    <div class="total-row total">
+                        <span>Total:</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                </div>
+                
+                <div class="delivery-options">
+                    <h2 style="margin-bottom: 20px; color: #333;">Delivery Options</h2>
+                    
+                    <div class="delivery-option">
+                        <input type="radio" id="standard" name="delivery" value="standard" checked>
+                        <div class="delivery-info">
+                            <div class="delivery-title">Standard Delivery</div>
+                            <div class="delivery-time">Delivered tomorrow (order by 2 PM)</div>
+                        </div>
+                        <div class="delivery-price">$${shipping.toFixed(2)}</div>
+                    </div>
+                    
+                    <div class="delivery-option">
+                        <input type="radio" id="express" name="delivery" value="express">
+                        <div class="delivery-info">
+                            <div class="delivery-title">Express Delivery</div>
+                            <div class="delivery-time">Delivered today (order by 12 PM)</div>
+                        </div>
+                        <div class="delivery-price">$10.00</div>
+                    </div>
+                </div>
+                
+                <div class="order-actions">
+                    <h2 style="margin-bottom: 20px; color: #333;">Complete Your Order</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 16px;">
+                        Choose your preferred method to place this order:
+                    </p>
+                    
+                    <button class="order-btn" onclick="orderViaWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                    </button>
+                    
+                    <button class="order-btn cart-btn" onclick="window.location.href='index.html'">
+                        <i class="fas fa-arrow-left"></i> Continue Shopping
+                    </button>
+                </div>
+            `;
+
+            checkoutContent.innerHTML = cartHTML;
+        }
+
+        function orderViaWhatsApp() {
+            const cart = JSON.parse(localStorage.getItem('alrhama_cart')) || [];
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Build order message
+            let message = 'Hello AL~RHAMA! I want to place an order:\n\n';
+            
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `${index + 1}. ${item.name}\n   Quantity: ${item.quantity}\n   Price: $${item.price.toFixed(2)} each\n   Total: $${itemTotal.toFixed(2)}\n\n`;
+            });
+            
+            message += `Subtotal: $${total.toFixed(2)}\n`;
+            message += `Shipping: $5.00\n`;
+            message += `------------------------\n`;
+            message += `TOTAL: $${(total + 5).toFixed(2)}\n\n`;
+            message += `Please deliver to my address. I will pay on delivery.\n\n`;
+            message += `Thank you!`;
+
+            // Encode message for WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Open WhatsApp with pre-filled message
+            const whatsappURL = `https://wa.me/233203749874?text=${encodedMessage}`;
+            
+            // Clear cart after order
+            if (confirm('This will send your order to AL~RHAMA via WhatsApp. Continue?')) {
+                localStorage.removeItem('alrhama_cart');
+                window.location.href = whatsappURL;
+            }
+        }
+    </script>
+</body>
+</html>
