@@ -749,9 +749,61 @@ style.textContent = `
         from { opacity: 1; }
         to { opacity: 0; }
     }
+    // Search Products Function
+function searchProducts() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const productGrid = document.getElementById('product-grid');
+    
+    if (searchTerm === '') {
+        // Show all products if search is empty
+        loadProducts(products);
+        return;
+    }
+    
+    // Filter products by name and description
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) || 
+        product.description.toLowerCase().includes(searchTerm)
+    );
+    
+    // Display results
+    loadProducts(filteredProducts);
+    
+    // Show "no results" message if nothing found
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>No products found matching "${searchTerm}"</p>
+                <button class="btn btn-primary" onclick="clearSearch()" style="margin-top: 15px;">
+                    Clear Search
+                </button>
+            </div>
+        `;
+    }
+}
+
+// Clear Search Function
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    loadProducts(products);
+}
+
+// Add event listener for Enter key
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+    }
+});
 `;
 
 document.head.appendChild(style);
+
 
 
 
